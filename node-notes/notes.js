@@ -1,10 +1,25 @@
 console.log('Starting notes.js.');
 
-var age = 18;
+var age = 20;
 
-function add(x, y) {
-  return x + y;
+// Arrow-functions
+// var add = (x, y) => x + y;
+
+var person = {
+  firstname: "Wolf",
+  lastname: "Reitsamer",
+  age: 20
 }
 
-module.exports.age = age;
-module.exports.add = add;
+// module.exports.age = age;
+// module.exports.add = add;
+// module.exports.person = person;
+
+module.exports = {
+  age,    // age: age,
+  add: (x, y) => x + y,    // add: add,
+  subtract: (x, y) => x - y,
+  multiply: (x, y) => x * y,
+  divide: (x, y) => x / y,    
+  person  // person: person
+}
