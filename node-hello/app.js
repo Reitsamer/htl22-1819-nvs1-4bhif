@@ -12,4 +12,8 @@ const userName = user.username;
 
 console.log(userName);
 
-fs.appendFileSync('grettings.txt', 'Hello!');
+// Interpolated strings
+// Console.WriteLine($"Hallo {username}!");
+
+// Template strings
+fs.appendFileSync('grettings.txt', `Hello ${userName}!`);
