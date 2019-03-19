@@ -1,3 +1,5 @@
+const yargs = require('yargs');
+
 const notes = require('./notes');
 
 // add --title="Einkaufen" --body="3 Eier, Milch"
@@ -5,14 +7,18 @@ const notes = require('./notes');
 // read --title "Einkaufen"
 // remove --title Einkaufen
 
+// console.log(yargs.argv);
+
+var argv = yargs.argv;
+
 var command = process.argv[2];
 
 console.log(command);
 
-// console.log(process.argv);
+console.log('argv:', process.argv);
 
-var title = 'Test';
-var body = 'Gehe mit dem Hund spazieren'
+var title = argv.title;
+var body = argv.body;
 
 if (command === 'add') {
   notes.addNote(title, body);
