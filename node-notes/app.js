@@ -13,10 +13,6 @@ var argv = yargs.argv;
 
 var command = process.argv[2];
 
-console.log(command);
-
-console.log('argv:', process.argv);
-
 var title = argv.title;
 var body = argv.body;
 
