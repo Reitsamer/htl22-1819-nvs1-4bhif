@@ -1,5 +1,10 @@
 const fs = require('fs');
 
+// CHALLENGE:
+// 1. Use 'chalk' to print success/error messages with green/red background
+// 2. Extract code for loading notes -> fetchNotes() (returns array of notes)
+// 3. Extract code for saving notes -> saveNotes(notes)
+
 var addNote = (title, body) => {
   // Define array
   var notes = [];
