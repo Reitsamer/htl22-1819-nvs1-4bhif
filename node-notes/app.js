@@ -1,18 +1,27 @@
-console.log('Starting app.js.');
-
 const notes = require('./notes');
 
+// add --title="Einkaufen" --body="3 Eier, Milch"
+// list
+// read --title "Einkaufen"
+// remove --title Einkaufen
 
-console.log(notes);
+var command = process.argv[2];
 
-console.log('Age:', notes.age);
+console.log(command);
 
-var result = notes.add(5, 7);
+// console.log(process.argv);
 
-console.log('Result:', result);
-console.log(`Result: ${result}`);
+var title = 'Test';
+var body = 'Gehe mit dem Hund spazieren'
 
-console.log('Der Vorname lautet:', notes.person.firstname);
-
-var result2 = notes.multiply(3, 5);
-console.log(`3 * 5 = ${result2}`);
+if (command === 'add') {
+  notes.addNote(title, body);
+} else if (command === 'list') {
+  notes.getAll();
+} else if (command === 'read') {
+  notes.getNote(title);
+} else if (command === 'remove') {
+  notes.removeNote(title);
+} else {
+  console.error('Command not recognized.');
+}
