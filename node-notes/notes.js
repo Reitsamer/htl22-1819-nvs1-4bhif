@@ -14,7 +14,13 @@ const chalk = require('chalk');
 
 
 var fetchNotes = () => {
-  
+  try {
+    // READ FILE 'notes-data.json'
+    var notesString = fs.readFileSync('notes-data.json');
+    return JSON.parse(notesString);
+  } catch (e) {
+    return []
+  }
 }
 
 // var fetchNotes = function() {
@@ -25,22 +31,19 @@ var fetchNotes = () => {
 //
 // }
 
+var saveNotes = (notes) => {
+  // WRITE FILE
+  fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+}
+
 var addNote = (title, body) => {
   // Define array
-  var notes = [];
+  var notes = fetchNotes();
 
   var newNote = {
     title: title,
     body: body
   };
-
-  try {
-    // READ FILE 'notes-data.json'
-    var notesString = fs.readFileSync('notes-data.json');
-    notes = JSON.parse(notesString);
-  } catch (e) {
-
-  }
 
   // var duplicateNotes = notes.filter((note) => {
   //   return note.title === newNote.title;
@@ -58,8 +61,7 @@ var addNote = (title, body) => {
   // ADD NEW NOTE TO ARRAY
   notes.push(newNote);
 
-  // WRITE FILE
-  fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+  saveNotes(notes);
 
   console.log(chalk.bgGreen.white('Success!'));
 }
