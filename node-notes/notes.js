@@ -1,9 +1,29 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
 // CHALLENGE:
 // 1. Use 'chalk' to print success/error messages with green/red background
 // 2. Extract code for loading notes -> fetchNotes() (returns array of notes)
 // 3. Extract code for saving notes -> saveNotes(notes)
+
+// Checklist für neues Modul:
+// 1. npmjs.com: Modul suchen
+// 2. Install: npm install ...
+// 3. Require: const ... = require('...');
+// 4. Use module ...
+
+
+var fetchNotes = () => {
+  
+}
+
+// var fetchNotes = function() {
+//
+// }
+//
+// function fetchNotes() {
+//
+// }
 
 var addNote = (title, body) => {
   // Define array
@@ -30,13 +50,18 @@ var addNote = (title, body) => {
 
 
   // Note with same title exits?
-  if (duplicateNotes.length > 0) return;
+  if (duplicateNotes.length > 0) {
+    console.log(chalk.bgRed.white(`Note with title '${title}' already exists!`));
+    return;
+  }
 
   // ADD NEW NOTE TO ARRAY
   notes.push(newNote);
 
   // WRITE FILE
   fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+
+  console.log(chalk.bgGreen.white('Success!'));
 }
 
 var getNote = (title) => {
