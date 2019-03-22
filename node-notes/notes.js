@@ -31,10 +31,7 @@ var fetchNotes = () => {
 //
 // }
 
-var saveNotes = (notes) => {
-  // WRITE FILE
-  fs.writeFileSync('notes-data.json', JSON.stringify(notes));
-}
+var saveNotes = (notes) => fs.writeFileSync('notes-data.json', JSON.stringify(notes));
 
 var addNote = (title, body) => {
   // Define array
@@ -64,23 +61,43 @@ var addNote = (title, body) => {
   saveNotes(notes);
 
   console.log(chalk.bgGreen.white('Success!'));
+  return newNote;
 }
 
 var getNote = (title) => {
-  console.log(`getNote: ${title}`);
+  var notes = fetchNotes();
+
+  var foundNotes = notes.filter((note) => note.title === title);
+
+  return foundNotes[0]
 }
 
 var getAll = () => {
-  console.log('getAll.');
+  return fetchNotes();
 }
 
 var removeNote = (title) => {
-  console.log('removeNote', title);
+  var allNotes = fetchNotes();
+
+  var remainingNotes = allNotes.filter((note) => note.title !== title);
+
+  saveNotes(remainingNotes);
+
+  return allNotes.length !== remainingNotes.length;
+}
+
+// Title: ...
+// Body: ...
+
+var logNote = (note) => {
+  console.log(chalk.blue('Title: '), note.title);
+  console.log(chalk.red('Body: '), note.body);
 }
 
 module.exports = {
   addNote,
   getNote,
   getAll,
-  removeNote
+  removeNote,
+  logNote
 }
