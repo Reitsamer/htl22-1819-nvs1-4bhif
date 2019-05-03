@@ -8,21 +8,21 @@ if (!location) {
     return
 }
 
-geocode(location, (error, data) => {
+geocode(location, (error, { latitude, longitude, place_name:foundLocation }) => {
     if (error) {
         console.log('Error:', error)
         return
     }
 
-    forecast(data.latitude, data.longitude, (error, forecastData) => {
+    forecast(latitude, longitude, (error, { summary, message }) => {
         if (error) {
             console.log('Error:', error)
             return
         }
     
-    console.log('Ort:', data.place_name)
-    console.log('Vorhersage:', forecastData.summary)
-    console.log('Nachricht:', forecastData.message)
+    console.log('Ort:', foundLocation)
+    console.log('Vorhersage:', summary)
+    console.log('Nachricht:', message)
     })
 })
 
