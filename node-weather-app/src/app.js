@@ -1,33 +1,33 @@
 const request = require('request')
 
-const url = 'https://api.darksky.net/forecast/ace7497ac9e8602309af76a56045a170/37.8267,-122.4233?units=si&lang=de'
+// TODO: call forecast-api
+const forecast = require('./utils/forecast')
+forecast(-75.7088, 44.1545, (error, data) => {
+    if (error) {
+        console.log('Error:', error)
+        return
+    }
 
-// request( url, () => {
+    console.log('Data:', data)
+})
+
+// const geocodingUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places/XXXLos%20Angeles.json?access_token=pk.eyJ1IjoicmVpdCIsImEiOiJjanVkM3F5aGUwaHk1NGRxcDZrcjlzaXdkIn0.bQG57GOwvmpb_41o5Kge_Q'
+
+// request( {url: geocodingUrl, json:true}, (error, response) => {
+//     if (error) {
+//         console.log('Unable to connect to service.')
+//         return;
+//     }
+
+//     if (response.body.features.length === 0) {
+//         console.log('Unable to find location.')
+//         return
+//     }
+
+//     const place_name = response.body.features[0].place_name
+//     const longitude = response.body.features[0].center[0]
+//     const latitude = response.body.features[0].center[1]
+
+//     console.log(`${place_name}: ${longitude}/${latitude}`)
 // })
 
-request( { url: url, json: true }, (error, response) => {
-    if (error) {
-        console.log('Unable to connect to service.')
-        return;
-    }
-
-    if (response.body.error) {
-        console.log('Unable to find location.')
-        return;
-    }
-
-    // const body = JSON.parse(response.body)
-    const body = response.body
-
-    const temperature = body.currently.temperature;
-    const precipProbability = body.currently.precipProbability;
-
-    console.log(body.daily.data[0].summary)
-    console.log(`Es hat zur Zeit ${temperature} Grad. Die Regenwahrscheinlichkeit liegt bei ${precipProbability}%.`)
-    
-}) 
-
-
-// GOAL:
-// 1. Print: "It's currently 52.79 degrees out. There is a 7% chance of rain."
-// 2. Test your work!
