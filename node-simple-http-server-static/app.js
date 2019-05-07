@@ -1,10 +1,11 @@
+const fs = require('fs')
 const http = require('http')
 
 const hostname = '127.0.0.1'
 const port = 8080
 const publicDir = 'public'
 
-const contentType = {
+const contentTypes = {
     'html': 'text/html',
     'js': 'application/javascript',
     'css': 'text/css',
@@ -23,7 +24,22 @@ server.on('request', (req, res) => {
         res.setHeader('Content-Type', 'text/html')
         res.write('<h1>Error: 400</h1><br>Extension: ' + fileExtension)
         res.end()
+        return
     }
+
+    if (!fs.existsSync(fileName)) {
+        res.statusCode = 404
+        res.setHeader('Content-Type', 'text/html')
+        res.write('<h1>Error: 404</h1><br>Filename: ' + fileName)
+        res.end()
+        return
+    }
+
+    var fileContent = fs.readFileSync(fileName)
+    res.statusCode = 200
+    res.setHeader('Content-Type', contentType)
+    res.write(fileContent)
+    res.end()
 })
 
 server.listen(port, hostname, () => {
@@ -44,7 +60,7 @@ const getFileExtension = (filename) => {
 }
 
 const getContentType = (fileExtension) => {
-    return contentType[fileExtension] === undefined ? null : contentType[fileExtension]
+    return contentTypes[fileExtension] === undefined ? null : contentTypes[fileExtension]
 }
 // res.statusCode = 200
 // res.setHeader('Content-Type', 'text/html')
