@@ -15,6 +15,15 @@ const hostname = 'localhost'
 
 const app = express()
 
+app.get('/HelloWorld', (req, res) => {
+})
+
+app.get('/HelloYou', (req, res) => {
+})
+
+app.get('/ServerTime', (req, res) => {
+})
+
 console.log(app)
 
 app.start(port, hostname)
