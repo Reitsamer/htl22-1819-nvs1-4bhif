@@ -60,5 +60,7 @@ const sendFile = (res, contentType, fileName) => {
 }
 
 module.exports = {
-    respondWithStaticFile
+    respondWithStaticFile,
+    sendError,
+    sendFile
 }
